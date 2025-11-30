@@ -35,10 +35,10 @@ export default function Layout({ children }: LayoutProps) {
   const location = useLocation()
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Mobile header */}
       <div className="lg:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-primary-600">Админ Панель</h1>
+        <h1 className="text-xl font-bold text-primary-600">Админка FOKUS</h1>
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
           className="p-2 rounded-lg hover:bg-gray-100"
@@ -47,16 +47,16 @@ export default function Layout({ children }: LayoutProps) {
         </button>
       </div>
 
-      <div className="flex">
+      <div className="flex flex-1">
         {/* Sidebar */}
         <aside
           className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 transform ${
             sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-          } transition-transform duration-300 ease-in-out lg:transition-none`}
+          } transition-transform duration-300 ease-in-out lg:transition-none flex flex-col`}
         >
           <div className="h-full flex flex-col">
             <div className="p-6 border-b border-gray-200 hidden lg:block">
-              <h1 className="text-2xl font-bold text-primary-600">Админ Панель</h1>
+              <h1 className="text-2xl font-bold text-primary-600">Админка FOKUS</h1>
               <p className="text-sm text-gray-500 mt-1">Цифровое Агентство</p>
             </div>
             
@@ -92,7 +92,7 @@ export default function Layout({ children }: LayoutProps) {
                 </div>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-gray-900">Администратор</p>
-                  <p className="text-xs text-gray-500">admin@agency.ru</p>
+                  <p className="text-xs text-gray-500">admin@fokus.ru</p>
                 </div>
               </div>
             </div>
@@ -108,14 +108,24 @@ export default function Layout({ children }: LayoutProps) {
         )}
 
         {/* Main content */}
-        <main className="flex-1 lg:ml-0 min-h-screen">
-          <div className="p-4 lg:p-8">
+        <main className="flex-1 lg:ml-0 min-h-screen flex flex-col">
+          <div className="flex-1 p-4 lg:p-8">
             {children}
           </div>
+          
+          {/* Footer */}
+          <footer className="border-t border-gray-200 bg-white px-4 lg:px-8 py-4 mt-auto">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-gray-500">
+              <div>
+                <p>Версия 1.0.1</p>
+              </div>
+              <div>
+                <p>Деятельность компании "Цифровое агентство FOKUS" с 2026 года</p>
+              </div>
+            </div>
+          </footer>
         </main>
       </div>
     </div>
   )
 }
-
-
