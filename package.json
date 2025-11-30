@@ -5,7 +5,7 @@
   "homepage": "https://YOUR_USERNAME.github.io/admin.panel",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && node scripts/copy-nojekyll.js",
     "preview": "vite preview",
     "deploy": "npm run build && gh-pages -d dist"
   },

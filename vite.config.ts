@@ -20,5 +20,19 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        // Убеждаемся что JS файлы имеют правильные расширения
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]'
+      }
+    }
   },
+  // Для правильной работы на GitHub Pages
+  server: {
+    headers: {
+      'Content-Type': 'application/javascript; charset=utf-8'
+    }
+  }
 })
