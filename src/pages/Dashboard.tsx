@@ -40,10 +40,10 @@ import { exportToPDF, exportToExcel } from '../utils/export'
 
 // Моковые данные
 const stats = [
-  { title: 'Всего клиентов', value: '1,234', change: '+12.5%', trend: 'up', icon: Users, color: 'text-blue-600' },
-  { title: 'Активных проектов', value: '48', change: '+8.2%', trend: 'up', icon: FolderKanban, color: 'text-green-600' },
-  { title: 'Выручка (мес)', value: '₽2,450,000', change: '+15.3%', trend: 'up', icon: DollarSign, color: 'text-purple-600' },
-  { title: 'Рост продаж', value: '24.8%', change: '+5.1%', trend: 'up', icon: TrendingUp, color: 'text-orange-600' },
+  { title: 'Всего клиентов', value: '1,234', change: '+12.5%', trend: 'up', icon: Users, color: 'text-primary-500' },
+  { title: 'Активных проектов', value: '48', change: '+8.2%', trend: 'up', icon: FolderKanban, color: 'text-accent-500' },
+  { title: 'Выручка (мес)', value: '₽2,450,000', change: '+15.3%', trend: 'up', icon: DollarSign, color: 'text-secondary-500' },
+  { title: 'Рост продаж', value: '24.8%', change: '+5.1%', trend: 'up', icon: TrendingUp, color: 'text-accent-300' },
 ]
 
 const revenueData = [
@@ -279,25 +279,25 @@ export default function Dashboard() {
         {stats.map((stat) => {
           const Icon = stat.icon
           return (
-            <div key={stat.title} className="card hover:shadow-md transition-shadow cursor-pointer" onClick={() => setShowDetails(true)} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && setShowDetails(true)}>
+            <div key={stat.title} className="stat-card hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-1" onClick={() => setShowDetails(true)} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && setShowDetails(true)}>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">{stat.title}</p>
-                  <p className="text-2xl font-bold text-gray-900 mt-2">{stat.value}</p>
+                  <p className="text-sm text-gray-600">{stat.title}</p>
+                  <p className="text-3xl font-bold text-gray-900 mt-2">{stat.value}</p>
                   <div className="flex items-center gap-1 mt-2">
                     {stat.trend === 'up' ? (
-                      <ArrowUpRight size={16} className="text-green-500" aria-hidden="true" />
+                      <ArrowUpRight size={16} className="text-accent-500" aria-hidden="true" />
                     ) : (
                       <ArrowDownRight size={16} className="text-red-500" aria-hidden="true" />
                     )}
-                    <span className={`text-sm ${stat.trend === 'up' ? 'text-green-500' : 'text-red-500'}`}>
+                    <span className={`text-sm font-medium ${stat.trend === 'up' ? 'text-accent-500' : 'text-red-500'}`}>
                       {stat.change}
                     </span>
                     <span className="text-sm text-gray-500">vs прошлый месяц</span>
                   </div>
                 </div>
-                <div className={`p-3 rounded-lg bg-gray-50 ${stat.color}`}>
-                  <Icon size={24} aria-hidden="true" />
+                <div className={`p-3 rounded-xl bg-secondary-100 ${stat.color}`}>
+                  <Icon size={28} aria-hidden="true" />
                 </div>
               </div>
             </div>
@@ -310,13 +310,13 @@ export default function Dashboard() {
         {taskStats.map((task) => {
           const Icon = task.icon
           return (
-            <div key={task.status} className="card">
+            <div key={task.status} className="stat-card">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">{task.status}</p>
+                  <p className="text-sm text-gray-600">{task.status}</p>
                   <p className="text-3xl font-bold text-gray-900 mt-2">{task.count}</p>
                 </div>
-                <div className="p-3 rounded-lg" style={{ backgroundColor: `${task.color}20` }}>
+                <div className="p-3 rounded-xl" style={{ backgroundColor: `${task.color}20` }}>
                   <Icon size={24} style={{ color: task.color }} aria-hidden="true" />
                 </div>
               </div>
@@ -334,7 +334,7 @@ export default function Dashboard() {
           </h2>
           <div className="grid grid-cols-2 gap-4">
             {promoCodeStats.map((stat) => (
-              <div key={stat.name} className="text-center p-4 bg-gray-50 rounded-lg">
+              <div key={stat.name} className="text-center p-4 bg-secondary-50 rounded-xl">
                 <p className="text-2xl font-bold" style={{ color: stat.color }}>{stat.value}</p>
                 <p className="text-sm text-gray-600 mt-1">{stat.name}</p>
               </div>
@@ -365,7 +365,7 @@ export default function Dashboard() {
           </h2>
           <div className="grid grid-cols-2 gap-4">
             {promotionStats.map((stat) => (
-              <div key={stat.name} className="text-center p-4 bg-gray-50 rounded-lg">
+              <div key={stat.name} className="text-center p-4 bg-secondary-50 rounded-xl">
                 <p className="text-2xl font-bold" style={{ color: stat.color }}>{stat.value}</p>
                 <p className="text-sm text-gray-600 mt-1">{stat.name}</p>
               </div>
