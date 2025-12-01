@@ -1,16 +1,10 @@
 import { useState } from 'react'
-import { 
-  User, 
-  Bell, 
-  Shield, 
-  Palette, 
-  Globe, 
-  Mail, 
-  Key, 
-  Database, 
-  Cloud, 
-  Moon, 
-  Sun,
+import {
+  User,
+  Bell,
+  Shield,
+  Palette,
+  Mail,
   Save,
   RotateCcw
 } from 'lucide-react'

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Search, Plus, Edit, Trash2, Eye, Phone, Mail, MapPin, Calendar, User, Link } from 'lucide-react'
+import { Search, Plus, Edit, Trash2, Eye, Phone, Mail, User, Link } from 'lucide-react'
 
 interface Partner {
   id: string

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Search, Plus, Edit, Trash2, Eye, Calendar, User, FolderKanban, BarChart3, Users } from 'lucide-react'
+import { Search, Plus, Edit, Trash2, Eye, User, CheckSquare } from 'lucide-react'
 
 interface Project {
   id: string
