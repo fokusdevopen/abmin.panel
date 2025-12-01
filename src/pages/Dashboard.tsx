@@ -15,7 +15,8 @@ import {
   AlertCircle,
   MapPin,
   Briefcase,
-  FileText
+  FileText,
+  Ticket
 } from 'lucide-react'
 import { 
   AreaChart, 
@@ -100,6 +101,23 @@ const clientTypesData = [
   { type: 'Стартапы', count: 123, revenue: 320000 },
 ]
 
+// Данные по промокодам
+const promoCodeStats = [
+  { name: 'Активные', value: 12, color: '#10b981' },
+  { name: 'Использованные', value: 57, color: '#0ea5e9' },
+  { name: 'Истёкшие', value: 3, color: '#f59e0b' },
+  { name: 'Заблокированные', value: 2, color: '#ef4444' },
+]
+
+const promoCodeUsageData = [
+  { date: '01.06', usage: 12 },
+  { date: '08.06', usage: 18 },
+  { date: '15.06', usage: 15 },
+  { date: '22.06', usage: 22 },
+  { date: '29.06', usage: 28 },
+  { date: '05.07', usage: 35 },
+]
+
 export default function Dashboard() {
   const [dateFrom, setDateFrom] = useState(format(new Date(new Date().setMonth(new Date().getMonth() - 1)), 'yyyy-MM-dd'))
   const [dateTo, setDateTo] = useState(format(new Date(), 'yyyy-MM-dd'))
@@ -160,14 +178,14 @@ export default function Dashboard() {
                 onClick={handleExportPDF}
                 className="w-full text-left px-4 py-2 hover:bg-gray-50 flex items-center gap-2 rounded-t-lg"
               >
-                <FileText size={16} />
+                <FileText size={16} aria-hidden="true" />
                 Экспорт в PDF
               </button>
               <button
                 onClick={handleExportExcel}
                 className="w-full text-left px-4 py-2 hover:bg-gray-50 flex items-center gap-2 rounded-b-lg"
               >
-                <FileText size={16} />
+                <FileText size={16} aria-hidden="true" />
                 Экспорт в Excel
               </button>
             </div>
@@ -253,16 +271,16 @@ export default function Dashboard() {
         {stats.map((stat) => {
           const Icon = stat.icon
           return (
-            <div key={stat.title} className="card hover:shadow-md transition-shadow cursor-pointer" onClick={() => setShowDetails(true)}>
+            <div key={stat.title} className="card hover:shadow-md transition-shadow cursor-pointer" onClick={() => setShowDetails(true)} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && setShowDetails(true)}>
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">{stat.title}</p>
                   <p className="text-2xl font-bold text-gray-900 mt-2">{stat.value}</p>
                   <div className="flex items-center gap-1 mt-2">
                     {stat.trend === 'up' ? (
-                      <ArrowUpRight size={16} className="text-green-500" />
+                      <ArrowUpRight size={16} className="text-green-500" aria-hidden="true" />
                     ) : (
-                      <ArrowDownRight size={16} className="text-red-500" />
+                      <ArrowDownRight size={16} className="text-red-500" aria-hidden="true" />
                     )}
                     <span className={`text-sm ${stat.trend === 'up' ? 'text-green-500' : 'text-red-500'}`}>
                       {stat.change}
@@ -271,7 +289,7 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div className={`p-3 rounded-lg bg-gray-50 ${stat.color}`}>
-                  <Icon size={24} />
+                  <Icon size={24} aria-hidden="true" />
                 </div>
               </div>
             </div>
@@ -291,12 +309,43 @@ export default function Dashboard() {
                   <p className="text-3xl font-bold text-gray-900 mt-2">{task.count}</p>
                 </div>
                 <div className="p-3 rounded-lg" style={{ backgroundColor: `${task.color}20` }}>
-                  <Icon size={24} style={{ color: task.color }} />
+                  <Icon size={24} style={{ color: task.color }} aria-hidden="true" />
                 </div>
               </div>
             </div>
           )
         })}
+      </div>
+
+      {/* Promo Code Stats */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="card">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <Ticket size={20} aria-hidden="true" />
+            Статистика по промокодам
+          </h2>
+          <div className="grid grid-cols-2 gap-4">
+            {promoCodeStats.map((stat) => (
+              <div key={stat.name} className="text-center p-4 bg-gray-50 rounded-lg">
+                <p className="text-2xl font-bold" style={{ color: stat.color }}>{stat.value}</p>
+                <p className="text-sm text-gray-600 mt-1">{stat.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="card">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Использование промокодов</h2>
+          <ResponsiveContainer width="100%" height={200}>
+            <BarChart data={promoCodeUsageData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="usage" fill="#0ea5e9" name="Использования" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
 
       {/* Charts Row 1 */}
