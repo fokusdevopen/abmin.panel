@@ -109,6 +109,14 @@ const promoCodeStats = [
   { name: 'Заблокированные', value: 2, color: '#ef4444' },
 ]
 
+// Данные по акциям
+const promotionStats = [
+  { name: 'Активные', value: 8, color: '#10b981' },
+  { name: 'Использованные', value: 142, color: '#0ea5e9' },
+  { name: 'Истёкшие', value: 5, color: '#f59e0b' },
+  { name: 'Запланированные', value: 3, color: '#8b5cf6' },
+]
+
 const promoCodeUsageData = [
   { date: '01.06', usage: 12 },
   { date: '08.06', usage: 18 },
@@ -345,6 +353,31 @@ export default function Dashboard() {
               <Bar dataKey="usage" fill="#0ea5e9" name="Использования" />
             </BarChart>
           </ResponsiveContainer>
+        </div>
+      </div>
+
+      {/* Promotion Stats */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="card">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <Ticket size={20} aria-hidden="true" />
+            Статистика по акциям
+          </h2>
+          <div className="grid grid-cols-2 gap-4">
+            {promotionStats.map((stat) => (
+              <div key={stat.name} className="text-center p-4 bg-gray-50 rounded-lg">
+                <p className="text-2xl font-bold" style={{ color: stat.color }}>{stat.value}</p>
+                <p className="text-sm text-gray-600 mt-1">{stat.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="card">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Использование акций</h2>
+          <div className="h-48 flex items-center justify-center text-gray-500">
+            <p>График использования акций будет здесь</p>
+          </div>
         </div>
       </div>
 
